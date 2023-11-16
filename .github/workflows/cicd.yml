@@ -68,5 +68,4 @@ jobs:
             git clone ${{secrets.GIT_REPO}}
             npm ci
             npm run build
-            # fdf
                
