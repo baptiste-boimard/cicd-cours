@@ -1,11 +1,11 @@
 {
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "next dev -p3001",
     "build": "next build",
     "start": "next start -p 3001",
-    "e2e": "start-server-and-test dev http://localhost:3002 \"cypress open --e2e\"",
-    "e2e:headless": "start-server-and-test dev http://localhost:3002 \"cypress run --e2e\"",
+    "e2e": "start-server-and-test dev http://localhost:3001 \"cypress open --e2e\"",
+    "e2e:headless": "start-server-and-test dev http://localhost:3001 \"cypress run --e2e\"",
     "component": "cypress open --component",
     "component:headless": "cypress run --component"
   },
