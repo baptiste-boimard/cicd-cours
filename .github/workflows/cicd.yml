@@ -58,8 +58,8 @@ jobs:
             ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
         - run: | 
             ssh -o StrictHostKeyChecking=no ${{secrets.SSH_USER}}@${{secrets.SSH_HOST}} "\
-            ls -la && \
-            cd cicd-cours"
+            ls -la"
+            #    pm2 start .. ou pm2 restart all && \
         - name: Setup ssh passphrase
           env:
             SSH_PRIVATE_KEY_GIT: ${{secrets. SSH_PRIVATE_KEY_GIT}}
@@ -68,6 +68,5 @@ jobs:
             git clone ${{secrets.GIT_REPO}}
             npm ci
             npm run build
-            #    pm2 start .. ou pm2 restart all && \
             # fdf
                
