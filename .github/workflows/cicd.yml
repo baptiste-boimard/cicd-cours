@@ -65,9 +65,9 @@ jobs:
             SSH_PRIVATE_KEY_GIT: ${{secrets. SSH_PRIVATE_KEY_GIT}}
             SSH_PASSPHRASE: ${{secrets.SSH_PASSPHRASE}}
           run: |
-            "git pull && \
-            npm ci && \
-            npm run build"
+            git pull
+            npm ci
+            npm run build
             #    pm2 start .. ou pm2 restart all && \
             # fdf
                
