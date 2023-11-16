@@ -56,11 +56,12 @@ jobs:
         - uses: webfactory/ssh-agent@v0.8.0
           with:
             ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
-        - run: ssh -o StrictHostKeyChecking=no ${{secrets.SSH_USER}}@${{secrets.SSH_HOST}} "\
-               ls -la && \
-               cd cicd-cours && \
-               git pull && \
-               npm ci && \
-               npm run build"
+        - run: | 
+            ssh -o StrictHostKeyChecking=no ${{secrets.SSH_USER}}@${{secrets.SSH_HOST}} "\
+            ls -la && \
+            cd cicd-cours && \
+            git pull && \
+            npm ci && \
+            npm run build"
             #    pm2 start .. ou pm2 restart all && \
                
