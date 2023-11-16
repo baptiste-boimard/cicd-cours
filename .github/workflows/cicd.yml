@@ -62,8 +62,8 @@ jobs:
             cd cicd-cours"
         - name: Setup ssh passphrase
           env:
-            SSH_PASSPHRASE: ${{secrets.SSH_PASSPHRASE}}
             SSH_PRIVATE_KEY_GIT: ${{secrets. SSH_PRIVATE_KEY_GIT}}
+            SSH_PASSPHRASE: ${{secrets.SSH_PASSPHRASE}}
           run: |
             git pull && \
             npm ci && \
