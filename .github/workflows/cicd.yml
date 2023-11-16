@@ -61,6 +61,6 @@ jobs:
                cd cicd-cours && \
                git pull && \
                npm ci && \
-               npm run build && \
+               npm run build && \"
             #    pm2 start .. ou pm2 restart all && \
-               "
+               
