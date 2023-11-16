@@ -62,7 +62,7 @@ jobs:
             #    pm2 start .. ou pm2 restart all && \
         - name: Setup ssh passphrase
           env:
-            SSH_PRIVATE_KEY_GIT: ${{secrets. SSH_PRIVATE_KEY_GIT}}
+            # SSH_PRIVATE_KEY_GIT: ${{secrets. SSH_PRIVATE_KEY_GIT}}
             SSH_PASSPHRASE: ${{secrets.SSH_PASSPHRASE}}
           run: |
             git clone ${{secrets.GIT_REPO}}
