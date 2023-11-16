@@ -59,7 +59,12 @@ jobs:
         - run: | 
             ssh -o StrictHostKeyChecking=no ${{secrets.SSH_USER}}@${{secrets.SSH_HOST}} "\
             ls -la && \
-            cd cicd-cours && \
+            cd cicd-cours"
+        - name: Setup ssh passphrase
+          env:
+            SSH_PASSPHRASE: ${{secrets.SSH_PASSPHRASE}}
+            SSH_PRIVATE_KEY_GIT: ${{secrets. SSH_PRIVATE_KEY_GIT}}
+          run: |
             git pull && \
             npm ci && \
             npm run build"
