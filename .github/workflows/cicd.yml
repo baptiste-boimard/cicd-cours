@@ -60,12 +60,12 @@ jobs:
             ssh -o StrictHostKeyChecking=no ${{secrets.SSH_USER}}@${{secrets.SSH_HOST}} "\
             ls -la"
             #    pm2 start .. ou pm2 restart all && \
-        - name: setup ssh agent for github
-          uses: webfactory/ssh-agent@v0.8.0
-          with:
-            ssh-private-key: ${{secrets. SSH_PRIVATE_KEY_GIT}}
-            run:  |
-              sudo git clone ${{secrets.GIT_REPO}}
+        # - name: setup ssh agent for github
+        #   uses: webfactory/ssh-agent@v0.8.0
+        #   with:
+        #     ssh-private-key: ${{secrets. SSH_PRIVATE_KEY_GIT}}
+        #     run:  |
+        #       sudo git clone ${{secrets.GIT_REPO}}
 
             
             
@@ -76,14 +76,13 @@ jobs:
         #         host: github.com
         #         private-key: ${{ secrets.SSH_PRIVATE_KEY }}
         #         passphrase: ${{secrets.SSH_PASSPHRASE}}
-        # - name: Setup ssh passphrase
-        #   env:
-        #     SSH_PRIVATE_KEY_GIT: ${{secrets. SSH_PRIVATE_KEY_GIT}}
-        #     SSH_PASSPHRASE: ${{secrets.SSH_PASSPHRASE}}
-          # run: |
-          #   sudo git clone ${{secrets.GIT_REPO}}
-          #   cd cicd-cours
-          #   sudo docker compose -f docker-compose.yml up -d --build
-          #   # dsfdf
+        - name: Setup ssh passphrase
+          env:
+            SSH_PRIVATE_KEY_GIT: ${{secrets. SSH_PRIVATE_KEY_GIT}}
+            SSH_PASSPHRASE: ${{secrets.SSH_PASSPHRASE}}
+          run: |
+            sudo git clone ${{secrets.GIT_REPO}}
+            cd cicd-cours
+            sudo docker compose -f docker-compose.yml up -d --build
             
                
