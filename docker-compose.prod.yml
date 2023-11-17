@@ -1,6 +1,6 @@
 services:
   next:
-    image: ghcr.io/baptiste-boimard/cicd-cours-next:latest
+    image: ghcr.io/baptiste-boimard/cicd-cours:main
     ports:
       - 3000:3000
 
