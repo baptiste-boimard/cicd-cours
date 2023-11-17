@@ -71,8 +71,8 @@ jobs:
         #     SSH_PRIVATE_KEY_GIT: ${{secrets. SSH_PRIVATE_KEY_GIT}}
         #     SSH_PASSPHRASE: ${{secrets.SSH_PASSPHRASE}}
           run: |
-            git clone ${{secrets.GIT_REPO}}
+            sudo git clone ${{secrets.GIT_REPO}}
             cd cicd-cours
-            docker compose -f docker-compose.yml up -d --build
+            sudo docker compose -f docker-compose.yml up -d --build
             
                
