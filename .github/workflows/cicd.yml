@@ -48,6 +48,30 @@ jobs:
         with:
           name: cypress-videos
           path: cypress/videos
+    
+  build-and-push-image:
+    runs-on: ubuntu-latest
+    if: github.ref_name == 'main'
+    permissions:
+      contents: read
+      packages: write
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Log in to the Container registry
+        uses: docker/login-action@65b78e6e13532edd9afa3aa52ac7964289d1a9c1
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Build and push Docker image
+        uses: docker/build-push-action@f2a1d5e99d037542a71f64918e516c093c6f3fc4
+        with:
+          context: .
+          push: true
+          tags: ghcr.io/${{ github.repository }}:${{ github.ref_name }}
 
   deploy:
     runs-on: ubuntu-latest
@@ -61,30 +85,8 @@ jobs:
             ls -la && \
             cd cicd-cours && \
             git pull && \
-            sudo docker compose -f docker-compose.yml -d up --build"
+            sudo docker compose -f docker-compose.yml -d up --pull=always"
             # le -d permet de se detacher du process et donc d'eviter qu'il start sur le ubuntu virtuel
             #    pm2 start .. ou pm2 restart all && \
-            
-  build-and-push-image:
-              runs-on: ubuntu-latest
-              if: github.ref_name == 'main'
-              permissions:
-                contents: read
-                packages: write
-              steps:
-                - name: Checkout repository
-                  uses: actions/checkout@v4
-          
-                - name: Log in to the Container registry
-                  uses: docker/login-action@65b78e6e13532edd9afa3aa52ac7964289d1a9c1
-                  with:
-                    registry: ghcr.io
-                    username: ${{ github.actor }}
-                    password: ${{ secrets.GITHUB_TOKEN }}
-          
-                - name: Build and push Docker image
-                  uses: docker/build-push-action@f2a1d5e99d037542a71f64918e516c093c6f3fc4
-                  with:
-                    context: .
-                    push: true
-                    tags: ghcr.io/${{ github.repository }}:${{ github.ref_name }}
+
+  
