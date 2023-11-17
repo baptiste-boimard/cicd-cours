@@ -18,7 +18,7 @@ export default function Home() {
         </h1>
 
         <p className={styles.description}>
-          Powa2222{' '}
+          Powa{' '}
           <code className={styles.code}>pages/index.js</code>
         </p>
 
