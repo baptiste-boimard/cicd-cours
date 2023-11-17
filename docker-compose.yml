@@ -1,5 +1,7 @@
 services:
   next:
     build: 
-      image:
+      context: .
+      target: next
+    ports: 
       - "3000:3000"
