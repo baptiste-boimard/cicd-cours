@@ -23,9 +23,9 @@ jobs:
     # permet de choisir une branche 
     runs-on: ubuntu-latest
     needs: build
-    strategy:
-      matrix:
-        browser: [chrome, edge]
+    # strategy:
+    #   matrix:
+    #     browser: [chrome, edge]
     steps:
       - uses: actions/checkout@v4
       - name: Cache node_modules
@@ -42,9 +42,31 @@ jobs:
           install: false
           build: npm run build
           start: npm run start
-        #   browser: chrome
+          browser: chrome
       - uses: actions/upload-artifact@v3
         if: always()
         with:
           name: cypress-videos
           path: cypress/videos
+
+  deploy:
+    runs-on: ubuntu-latest
+    # needs: [build, test]
+    steps:
+        - uses: webfactory/ssh-agent@v0.8.0
+          with:
+            ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+        - run: | 
+            ssh -o StrictHostKeyChecking=no ${{secrets.SSH_USER}}@${{secrets.SSH_HOST}} "\
+            ls -la"
+            #    pm2 start .. ou pm2 restart all && \
+        - name: Setup ssh passphrase
+          env:
+            SSH_PRIVATE_KEY_GIT: ${{secrets. SSH_PRIVATE_KEY_GIT}}
+            SSH_PASSPHRASE: ${{secrets.SSH_PASSPHRASE}}
+          run: |
+            git clone ${{secrets.GIT_REPO}}
+            npm ci
+            npm run build
+            
+               

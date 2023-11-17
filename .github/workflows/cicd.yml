@@ -60,13 +60,19 @@ jobs:
             ssh -o StrictHostKeyChecking=no ${{secrets.SSH_USER}}@${{secrets.SSH_HOST}} "\
             ls -la"
             #    pm2 start .. ou pm2 restart all && \
+        - name: Setup SSH
+          uses: MrSquaare/ssh-setup-action@v1
+          with:
+                host: github.com
+                private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+                passphrase: ${{secrets.SSH_PASSPHRASE}}
         - name: Setup ssh passphrase
-          env:
-            # SSH_PRIVATE_KEY_GIT: ${{secrets. SSH_PRIVATE_KEY_GIT}}
-            SSH_PASSPHRASE: ${{secrets.SSH_PASSPHRASE}}
+        #   env:
+        #     SSH_PRIVATE_KEY_GIT: ${{secrets. SSH_PRIVATE_KEY_GIT}}
+        #     SSH_PASSPHRASE: ${{secrets.SSH_PASSPHRASE}}
           run: |
             git clone ${{secrets.GIT_REPO}}
-            npm ci
-            npm run build
+            cd cicd-cours
+            docker compose -f docker-compose.yml up -d --build
             
                
