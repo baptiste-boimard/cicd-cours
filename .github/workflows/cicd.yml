@@ -61,5 +61,6 @@ jobs:
             ls -la && \
             cd cicd-cours && \
             git pull && \
-            sudo docker compose -f docker-compose.yml up -d --build"
+            sudo docker compose -f docker-compose.yml up"
+            # sudo docker compose -f docker-compose.yml up -d --build"
             #    pm2 start .. ou pm2 restart all && \
