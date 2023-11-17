@@ -1,10 +1,5 @@
 services:
   next:
     build: 
-      context: .
-      target: next
-    command: npm run dev
-    ports: 
+      image:
       - "3000:3000"
-    volumes:
-      - .:/app
