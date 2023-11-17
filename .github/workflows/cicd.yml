@@ -84,8 +84,8 @@ jobs:
             ssh -o StrictHostKeyChecking=no ${{secrets.SSH_USER}}@${{secrets.SSH_HOST}} "\
             ls -la && \
             cd cicd-cours && \
-            # git pull && \
             sudo docker compose -f docker-compose.prod.yml up -d --pull=always"
+            # git pull && \
             # le -d permet de se detacher du process et donc d'eviter qu'il start sur le ubuntu virtuel
             #    pm2 start .. ou pm2 restart all && \
 
