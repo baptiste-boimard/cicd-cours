@@ -58,7 +58,9 @@ jobs:
             ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
         - run: | 
             ssh -o StrictHostKeyChecking=no ${{secrets.SSH_USER}}@${{secrets.SSH_HOST}} "\
-            ls -la"
+            ls -la && \
+            cd cicd-cours && \
+            git pull"
             #    pm2 start .. ou pm2 restart all && \
         # - name: setup ssh agent for github
         #   uses: webfactory/ssh-agent@v0.8.0
@@ -76,13 +78,13 @@ jobs:
         #         host: github.com
         #         private-key: ${{ secrets.SSH_PRIVATE_KEY }}
         #         passphrase: ${{secrets.SSH_PASSPHRASE}}
-        - name: Setup ssh passphrase
-          env:
-            SSH_PRIVATE_KEY_GIT: ${{secrets. SSH_PRIVATE_KEY_GIT}}
-            SSH_PASSPHRASE: ${{secrets.SSH_PASSPHRASE}}
-          run: |
-            sudo git clone ${{secrets.GIT_REPO}}
-            cd cicd-cours
-            sudo docker compose -f docker-compose.yml up -d --build
+        # - name: Setup ssh passphrase
+        #   env:
+        #     SSH_PRIVATE_KEY_GIT: ${{secrets. SSH_PRIVATE_KEY_GIT}}
+        #     SSH_PASSPHRASE: ${{secrets.SSH_PASSPHRASE}}
+        #   run: |
+        #     sudo git clone ${{secrets.GIT_REPO}}
+        #     cd cicd-cours
+        #     sudo docker compose -f docker-compose.yml up -d --build
             
                
