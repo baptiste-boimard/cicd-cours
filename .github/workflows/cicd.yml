@@ -74,5 +74,6 @@ jobs:
             sudo git clone ${{secrets.GIT_REPO}}
             cd cicd-cours
             sudo docker compose -f docker-compose.yml up -d --build
+            # dsfdf
             
                
